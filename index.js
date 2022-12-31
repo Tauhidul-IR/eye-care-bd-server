@@ -30,7 +30,7 @@ async function run() {
         //all doctors
         app.get('/allDoctors', async (req, res) => {
             const date = req.query.date;
-            console.log(date);
+            // console.log(date);
             const query = {};
             const doctors = await doctorsCollection.find(query).toArray();
             const bookingQuery = {
@@ -74,7 +74,19 @@ async function run() {
             const result = await doctorBookingsCollection.insertOne(booking);
             res.send(result);
         })
+
+
+        app.get('/bookingDoctor', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            const bookings = await doctorBookingsCollection.find(query).toArray();
+            res.send(bookings);
+        })
+
+
+
     }
+
     finally {
 
     }
